@@ -11,6 +11,7 @@
     calendario: '<rect x="3.5" y="5" width="17" height="15.5" rx="2.2"/><path d="M3.5 9.6h17M8 3v4M16 3v4"/><path class="ico-pips" d="M8 13.6h.01M12 13.6h.01M16 13.6h.01M8 17.2h.01M12 17.2h.01"/>',
     carteira: '<path d="M18 7.5V5.2A1.2 1.2 0 0 0 16.8 4H5.5a2 2 0 0 0 0 4"/><path d="M3.5 6v12a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1h-14"/><path d="M16 14h.01"/><circle class="ico-coin" cx="12" cy="3" r="1.5"/>',
     cifrao: '<path d="M12 2.5v19"/><path d="M16.5 6.5C15.7 5.2 14 4.5 12 4.5c-2.6 0-4.3 1.3-4.3 3.2 0 4.4 9 2.3 9 7 0 1.9-1.8 3.3-4.7 3.3-2.3 0-4.2-.9-5-2.5"/>',
+    lista: '<path d="M9 6h11M9 12h11M9 18h11"/><path class="ico-pips" d="M4.5 6h.01M4.5 12h.01M4.5 18h.01"/>',
     pessoa: '<circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/>',
 
     // as metas (o "icon" de backend/js/historia.js e das rodadas do jogo)
