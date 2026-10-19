@@ -400,9 +400,9 @@ button{font:inherit;color:inherit}
 /* as caixas crescem com o prazo: a do longo prazo é a maior */
 .cbox{position:relative;flex:none;display:flex;flex-direction:column;align-items:center;padding:0 0 2px;border:0;border-radius:16px;background:none;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .cbox__art{display:block;width:var(--w,100px);animation:box-in .8s var(--spring) both}
-.cbox--curto{--w:90px}
-.cbox--medio{--w:106px}
-.cbox--longo{--w:122px}
+.cbox--curto{--w:102px}
+.cbox--medio{--w:120px}
+.cbox--longo{--w:138px}
 .cbox--medio .cbox__art{animation-delay:.1s}
 .cbox--longo .cbox__art{animation-delay:.2s}
 .cbox__name{margin-top:6px;font-family:var(--ff-display);font-weight:700;font-size:15px;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
