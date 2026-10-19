@@ -387,7 +387,7 @@ button{font:inherit;color:inherit}
 /* ---------- Abertura: as caixas que falam e o ponto de partida ---------- */
 /* No computador, o texto fica à esquerda e as 3 caixas à direita, em pé no
    chão do cartão, com o balão de fala em cima delas. */
-.intro{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 352px;column-gap:24px;margin-top:40px;padding:30px 24px 0 30px}
+.intro{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 388px;column-gap:24px;margin-top:40px;padding:30px 24px 0 30px}
 .intro__text{min-width:0;padding-bottom:28px;container-type:inline-size}
 .intro__tag{display:inline-flex;align-items:center;gap:7px;padding:5px 12px 5px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink);font-weight:600}
 .intro__tag .ico{width:14px;height:14px}

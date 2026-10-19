@@ -87,20 +87,29 @@
       "</li>";
   }
 
-  // o que os números mostram: a meta mais cara não é a que mais pesa no
-  // mês, e a caixa de curto prazo fica livre logo
+  // "20 vezes mais", quando dá um número redondo de vezes; senão, "muito mais"
+  function vezes(a, b) {
+    var r = a / b;
+    return Math.abs(r - Math.round(r)) < 0.05 && r >= 2 ? Math.round(r) + " vezes mais" : "muito mais";
+  }
+
+  // O que os números mostram: a meta mais cara pesa menos no mês do que uma
+  // bem mais barata, quando tem muito mais tempo, e a caixa de curto prazo
+  // fica livre logo. Os nomes vão como etiqueta ("<strong>Primeiro
+  // carro</strong>"), sem artigo: assim a frase serve pra qualquer meta de
+  // historia.js.
   function insightHTML() {
     var metas = Ex.metas;
     var cara = metas.slice().sort(function (a, b) { return b.total - a.total; })[0];
-    var pesada = metas.slice().sort(function (a, b) { return b.monthly - a.monthly || a.months - b.months; })[0];
+    // a meta mais barata que pede mais por mês do que a mais cara
+    var surpresa = metas.filter(function (m) { return m.monthly > cara.monthly; })
+      .sort(function (a, b) { return a.total - b.total; })[0];
     var txt;
-    // os nomes vão como etiqueta ("<strong>Primeiro carro</strong>"), sem
-    // artigo: assim a frase serve pra qualquer meta de historia.js
-    if (cara !== pesada) {
-      txt = "A meta mais cara, <strong>" + Format.esc(cara.name) + "</strong> (" + nw(Format.money(cara.total)) +
-        "), não é a que mais pesa no mês: com " + nw(Format.unit(cara.months, "meses")) + " para juntar, ela pede " +
-        nw(Format.money(cara.monthly)) + " por mês. A que mais pesa é <strong>" + Format.esc(pesada.name) +
-        "</strong>: " + nw(Format.money(pesada.monthly)) + " por mês, porque faltam só " + nw(Format.unit(pesada.months, "meses")) + ".";
+    if (surpresa) {
+      txt = "Repare: <strong>" + Format.esc(surpresa.name) + "</strong> custa " + nw(Format.money(surpresa.total)) +
+        " e pede " + nw(Format.money(surpresa.monthly)) + " por mês. <strong>" + Format.esc(cara.name) + "</strong> custa " +
+        vezes(cara.total, surpresa.total) + " (" + nw(Format.money(cara.total)) + "), mas pede só " + nw(Format.money(cara.monthly)) +
+        " por mês: são " + nw(Format.unit(cara.months, "meses")) + " para juntar, contra " + nw(Format.unit(surpresa.months, "meses")) + ".";
     } else {
       txt = "A meta mais cara, <strong>" + Format.esc(cara.name) + "</strong>, também é a que mais pesa no mês: " +
         nw(Format.money(cara.monthly)) + " por mês, por " + nw(Format.unit(cara.months, "meses")) + ".";
