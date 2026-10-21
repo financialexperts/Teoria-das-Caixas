@@ -94,7 +94,7 @@
   }
 
   function boxHTML(c) {
-    return '<section class="card pbox pbox--' + c.key + '" data-box="' + c.key + '" aria-labelledby="pb-' + c.key + '-title">' +
+    return '<section class="card pbox pbox--' + c.key + '" data-pbox="' + c.key + '" aria-labelledby="pb-' + c.key + '-title">' +
       '<div class="pbox__side">' +
         '<span class="pbox__art">' + Icons.box(c.key) + "</span>" +
         '<h3 class="pbox__name" id="pb-' + c.key + '-title">' + Format.esc(c.name) + "</h3>" +
@@ -172,7 +172,7 @@
   function syncBox(c) {
     var list = P.metasOf(c.key);
     list.forEach(function (m) { syncMeta(c, m); });
-    var card = root.querySelector('[data-box="' + c.key + '"]');
+    var card = root.querySelector('[data-pbox="' + c.key + '"]');
     card.querySelector("[data-box-total]").textContent = Format.money(P.boxTotal(c.key));
     card.querySelector("[data-add]").hidden = list.length >= P.MAX;
     card.classList.toggle("is-ready", list.some(function (m) { return P.calc(m, c.key).monthly !== null; }));

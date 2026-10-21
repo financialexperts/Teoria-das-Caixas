@@ -212,6 +212,7 @@
   .psheet__fill{flex:1;min-width:8mm;min-height:5mm;padding:0 1mm;border-bottom:1px solid #9E9CB4;font-family:var(--ff-mono);font-size:10pt}
   /* com 2 ou 3 metas lado a lado, o rótulo fica em cima da linha */
   .psheet__metas:not(.psheet__metas--1) .psheet__line{flex-wrap:wrap;row-gap:.5mm}
+  .psheet__metas:not(.psheet__metas--1) .psheet__label{flex:1 1 0;min-width:0}
   .psheet__metas:not(.psheet__metas--1) .psheet__fill{flex-basis:100%;padding-left:6mm}
   .psheet__formula{margin-top:6mm;font-family:var(--ff-display);font-style:italic;font-weight:600;font-size:12pt;text-align:center}
 }
