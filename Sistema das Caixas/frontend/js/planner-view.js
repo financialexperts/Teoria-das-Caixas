@@ -305,7 +305,7 @@
           '<div class="psheet__side">' + Icons.box(c.key) +
             '<p class="psheet__name">' + Format.esc(c.name) + "</p>" +
             '<p class="psheet__range">(' + Format.esc(c.range) + ")</p></div>" +
-          '<div class="psheet__metas">' + list.map(function (m) {
+          '<div class="psheet__metas psheet__metas--' + list.length + '">' + list.map(function (m) {
             var x = P.calc(m, c.key);
             return '<div class="psheet__meta">' +
               line("lista", "Descrição da meta:", m.desc.trim()) +

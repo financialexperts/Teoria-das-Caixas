@@ -1,0 +1,217 @@
+/* ---------- Meu planejamento ---------- */
+/* A página do "Meu planejamento financeiro": a folha das caixas preenchida
+   pelo próprio aluno. Vem depois do styles.css e usa as mesmas peças
+   (cartões, células, medidores, a barra do saldo); aqui só fica o que é
+   desta página, e a folha impressa. */
+
+/* ---------- A abertura ---------- */
+.pintro{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:20px 28px;align-items:center;margin-top:40px;padding:30px}
+.pintro__text{min-width:0}
+.pintro h1{margin-top:14px;font-size:clamp(26px,4.2vw,40px);line-height:1.08;max-width:17ch}
+.pintro__today{display:flex;align-items:center;gap:9px;margin-top:16px;font-size:14px;color:var(--ink-soft)}
+.pintro__today strong{font-weight:600;color:var(--ink)}
+.pintro__side{min-width:0}
+.ckeys--stack{grid-template-columns:minmax(0,1fr);margin-top:0}
+.ckeys--stack .ckey{padding:9px 14px 9px 10px}
+.ckeys--stack .ckey__box{width:44px}
+.ckeys--stack .ckey__text{flex:1;flex-direction:row;align-items:baseline;justify-content:space-between;gap:10px}
+/* a conta da folha, como no rodapé dela */
+.pintro__formula{display:flex;flex-direction:column;gap:2px;margin-top:10px;padding:10px 14px;border:1px dashed var(--line-strong);border-radius:14px;font-family:var(--ff-display);font-style:italic;font-weight:600;font-size:15.5px;letter-spacing:-.01em;line-height:1.3;text-align:center}
+.pintro__formula .howto__formula-label{font-style:normal}
+
+/* como preencher, em 3 passos */
+.phow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 0;padding:0;list-style:none;counter-reset:passo}
+.phow__step{display:flex;align-items:flex-start;gap:12px;min-width:0;padding:14px 16px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow-sm);counter-increment:passo}
+.phow__step > div{min-width:0}
+.phow__title{font-family:var(--ff-display);font-weight:700;font-size:15.5px;letter-spacing:-.01em;line-height:1.3}
+.phow__title::before{content:counter(passo) ". ";color:var(--muted)}
+.phow__text{margin-top:2px;font-size:13.5px;line-height:1.5;color:var(--ink-soft)}
+
+/* ---------- O saldo do mês ---------- */
+.psaldo{margin-top:20px;padding:20px 22px 22px}
+.psaldo__title{margin-top:2px;font-size:19px;line-height:1.25}
+/* receita − despesas = saldo, lado a lado como uma conta */
+.psaldo__eq{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);align-items:stretch;gap:10px;margin-top:16px}
+.psaldo__item{display:flex;flex-direction:column;min-width:0;padding:12px 14px 14px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2)}
+.psaldo__label{font-weight:600;font-size:14.5px;line-height:1.3}
+.psaldo__hint{margin-bottom:10px;font-size:12.5px;line-height:1.4;color:var(--muted)}
+.psaldo__item .pcell{margin-top:auto}
+.psaldo__op{align-self:center;padding-top:26px;font-family:var(--ff-mono);font-size:24px;font-weight:600;line-height:1;color:var(--muted)}
+.psaldo__result{border-color:var(--accent-ink);background:var(--accent-soft)}
+.psaldo__result .psaldo__hint{color:var(--ink-soft)}
+.psaldo__value{display:flex;align-items:center;height:40px;margin-top:auto;font-family:var(--ff-mono);font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--accent-ink);white-space:nowrap}
+.psaldo__result.is-neg{border-color:var(--danger);background:color-mix(in srgb,var(--danger) 7%,var(--surface))}
+.psaldo__result.is-neg .psaldo__value{color:var(--danger)}
+
+/* as células de valor desta página ocupam a largura toda do lugar delas */
+.cell.pcell{flex:none;width:100%;min-width:0;margin-left:0}
+
+/* o saldo nas caixas passou do saldo do mês: o medidor fica vermelho */
+.meter--saldo.is-over{border-color:color-mix(in srgb,var(--danger) 55%,var(--line))}
+.meter--saldo.is-over .meter__used{color:var(--danger)}
+.meter--saldo.is-over .meter__track{box-shadow:inset 0 0 0 1.5px var(--danger)}
+
+/* o título do passo 2, em cima das caixas */
+.pstep-title{display:flex;flex-direction:column;gap:2px;margin-top:6px;font-family:var(--ff-display);font-weight:700;font-size:19px;letter-spacing:-.02em;line-height:1.25}
+
+/* ---------- As 3 caixas ---------- */
+/* Como na folha: a faixa da caixa à esquerda (o desenho, o nome e o prazo,
+   na cor dela) e as metas à direita, lado a lado quando cabem. */
+.pboxes{display:grid;gap:16px;margin-top:12px}
+.pbox{display:grid;grid-template-columns:180px minmax(0,1fr);overflow:hidden;border-top:4px solid var(--cb)}
+.pbox__side{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:20px 14px;border-right:1px solid color-mix(in srgb,var(--cb) 28%,var(--line));background:linear-gradient(180deg,color-mix(in srgb,var(--cb) 16%,var(--surface)),color-mix(in srgb,var(--cb) 5%,var(--surface)));text-align:center}
+.pbox__art{display:block;width:92px;margin-bottom:6px}
+.pbox__name{font-size:20px;line-height:1.2;color:var(--c)}
+.pbox__range{font-family:var(--ff-mono);font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft)}
+/* a caixa com alguma meta pronta fica de tampa aberta */
+.pbox .boxart__lid{transition:transform .5s var(--spring)}
+.pbox.is-ready .boxart__lid{transform:translate(-5px,-11px) rotate(-13deg)}
+.pbox__main{min-width:0;padding:16px 18px}
+.pbox__metas{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+
+/* uma meta, com as linhas da folha */
+.pmeta{display:flex;flex-direction:column;gap:8px;min-width:0;padding:12px 14px 14px;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);transition:border-color .2s,background .2s}
+.pmeta.is-ok{border-color:color-mix(in srgb,var(--cb) 50%,var(--line))}
+.pmeta.is-warn{border-color:var(--warm)}
+@keyframes pmeta-in{from{box-shadow:0 0 0 5px color-mix(in srgb,var(--cb) 45%,transparent);transform:scale(.97)}to{box-shadow:0 0 0 0 transparent;transform:none}}
+.pmeta.is-moved{animation:pmeta-in .9s var(--spring)}
+.pmeta__head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-2px -6px -2px 0}
+.pmeta__num{font-family:var(--ff-mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+.pmeta__del{display:grid;place-items:center;width:32px;height:32px;padding:0;border:0;border-radius:8px;background:transparent;color:var(--muted);cursor:pointer;transition:color .15s,background .15s}
+.pmeta__del .ico{width:16px;height:16px}
+@media (hover:hover){.pmeta__del:hover{color:var(--danger);background:color-mix(in srgb,var(--danger) 9%,transparent)}}
+
+/* Uma linha da folha: o ícone e o rótulo em cima e o campo embaixo. As
+   linhas das contas (meses e valor por mês) ficam numa linha só, com o
+   valor à direita. */
+.pline{display:grid;grid-template-columns:18px minmax(0,1fr);align-items:center;gap:5px 8px}
+.pline__ico{display:grid;place-items:center;color:var(--c)}
+.pline__ico .ico{width:16px;height:16px}
+.pline__label{min-width:0;font-size:12.5px;font-weight:600;line-height:1.3;color:var(--ink-soft)}
+.pline > :is(.pline__input,.pdate,.pcell){grid-column:1 / -1}
+.pline__input{width:100%;min-width:0;height:40px;padding:0 11px;border:1.5px solid var(--line-strong);border-radius:9px;background:var(--surface);font-family:var(--ff-body);font-size:16px;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+.pline__input::placeholder{font-size:14px;color:var(--muted);opacity:.8}
+.pline__input:focus{outline:none;border-color:var(--focus);box-shadow:0 0 0 3px color-mix(in srgb,var(--focus) 22%,transparent)}
+.pdate{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:6px}
+/* o mês e o ano, com a setinha desenhada (a do navegador some) */
+.pselect{width:100%;min-width:0;height:40px;padding:0 28px 0 10px;border:1.5px solid var(--line-strong);border-radius:9px;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23827F9F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M4 6.5 8 10.5 12 6.5'/%3E%3C/svg%3E") right 9px center/14px no-repeat;font-family:var(--ff-body);font-size:16px;color:var(--ink);cursor:pointer;-webkit-appearance:none;appearance:none;transition:border-color .15s,box-shadow .15s}
+.pselect:focus{outline:none;border-color:var(--focus);box-shadow:0 0 0 3px color-mix(in srgb,var(--focus) 22%,transparent)}
+/* a lista que abre segue o tema da página, e não o do sistema */
+[data-theme="light"] .pselect{color-scheme:light}
+[data-theme="dark"] .pselect{color-scheme:dark}
+.pline--calc{grid-template-columns:18px minmax(0,1fr) auto;padding:7px 10px 7px 8px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+.pline__value{font-family:var(--ff-mono);font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink)}
+/* o valor a poupar por mês: o resultado da meta, na cor da caixa */
+.pline--main{border-color:color-mix(in srgb,var(--cb) 45%,var(--line));background:color-mix(in srgb,var(--cb) 9%,var(--surface))}
+.pline--main .pline__label{color:var(--ink)}
+.pline--main .pline__value{font-size:15.5px;color:var(--c)}
+.pmeta:not(.is-ok) .pline--calc .pline__value{color:var(--muted)}
+.pmeta.is-warn .pline--main .pline__value{color:var(--ink)}
+
+/* a conta da meta, por extenso */
+.pmeta__conta{text-align:right;font-family:var(--ff-mono);font-size:12px;color:var(--muted)}
+.pmeta__conta:empty{display:none}
+.pmeta__conta strong{font-weight:600;color:var(--ink-soft)}
+
+/* o aviso embaixo da meta (falta alguma coisa, data que passou, caixa errada) */
+.pmsg{display:flex;align-items:flex-start;gap:7px;font-size:13px;line-height:1.45;color:var(--muted)}
+.pmsg .ico{flex:none;width:15px;height:15px;margin-top:2px}
+.pmsg--warn{color:color-mix(in srgb,var(--warm) 72%,var(--ink))}
+.pmsg strong{font-weight:600}
+.pmsg__btn{width:100%;margin-top:8px}
+.btn.pmsg__btn:disabled{opacity:.6;cursor:default}
+
+/* o pé da caixa: mais uma meta e o total dela por mês */
+.pbox__foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 16px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+.pbox__total{margin-left:auto;font-size:14px;color:var(--ink-soft)}
+.pbox__total strong{margin-left:6px;font-family:var(--ff-mono);font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--c)}
+
+/* ---------- O resumo ---------- */
+.presumo{margin-top:20px}
+.pverdict{margin-top:14px;padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2);font-size:14.5px;line-height:1.6;color:var(--ink-soft)}
+.pverdict__title{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-family:var(--ff-display);font-weight:700;font-size:17px;letter-spacing:-.01em;line-height:1.3;color:var(--ink)}
+.pverdict--ok{border-color:var(--accent-ink);background:var(--accent-soft)}
+.pverdict--over{border-color:color-mix(in srgb,var(--danger) 50%,var(--line));background:color-mix(in srgb,var(--danger) 6%,var(--surface))}
+.pverdict__list{margin:10px 0 0;padding-left:20px}
+.pverdict__list li + li{margin-top:6px}
+.pverdict__list strong{font-weight:600;color:var(--ink)}
+.sbar__item--over{color:var(--danger)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  .pintro{grid-template-columns:minmax(0,1fr);gap:22px}
+  .pintro h1{max-width:none}
+  .ckeys--stack{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .ckeys--stack .ckey__text{flex-direction:column;gap:0}
+  .phow{grid-template-columns:minmax(0,1fr)}
+  .phow__step{padding:12px 14px}
+}
+@media (max-width:760px){
+  .ckeys--stack{grid-template-columns:minmax(0,1fr)}
+  .ckeys--stack .ckey__text{flex-direction:row;gap:10px}
+  /* a conta do saldo, uma parte embaixo da outra */
+  .psaldo__eq{grid-template-columns:minmax(0,1fr);gap:6px}
+  .psaldo__op{justify-self:center;padding:0;font-size:20px}
+  .psaldo__hint{margin-bottom:8px}
+  /* a faixa da caixa vira o título dela, em cima das metas */
+  .pbox{grid-template-columns:minmax(0,1fr)}
+  .pbox__side{flex-direction:row;flex-wrap:wrap;justify-content:flex-start;column-gap:12px;padding:12px 16px;border-right:0;border-bottom:1px solid color-mix(in srgb,var(--cb) 28%,var(--line));background:linear-gradient(90deg,color-mix(in srgb,var(--cb) 16%,var(--surface)),color-mix(in srgb,var(--cb) 4%,var(--surface)));text-align:left}
+  .pbox__art{width:52px;margin:0}
+  .pbox__name{font-size:18px}
+  .pbox__range{margin-left:auto}
+}
+@media (max-width:720px){
+  .pintro{margin-top:20px;padding:20px 16px 18px}
+  .pintro h1{margin-top:12px;font-size:clamp(24px,7vw,30px)}
+  .psaldo{padding:16px 16px 18px}
+  .pbox__main{padding:14px 12px}
+  .pline__input,.pselect{height:44px}
+  .pbox__foot{flex-direction:column;align-items:stretch}
+  .pbox__foot .btn{width:100%}
+  .pbox__total{display:flex;align-items:baseline;justify-content:space-between;margin-left:0}
+  .pverdict{padding:14px}
+}
+@media (max-width:380px){
+  .pbox__range{margin-left:0;flex-basis:100%;padding-left:64px;margin-top:-8px}
+}
+
+/* ---------- A folha impressa ---------- */
+/* Na tela ela não aparece. Na impressão, só ela aparece: o título, uma
+   faixa por caixa (o desenho, o nome e o prazo, na cor da caixa) com as
+   linhas da folha preenchidas, e a conta no rodapé, como a folha original.
+   As cores são fixas (as do tema claro), pra a folha sair igual com o tema
+   escuro ligado. */
+.psheet{display:none}
+@media print{
+  @page{size:A4;margin:12mm}
+  body{background:#fff;color:#272259}
+  body > :not(.psheet){display:none!important}
+  .psheet{display:block;--ink:#272259;--muted:#827F9F;--curto-box:#2A6FD6;--medio-box:#E0AA2E;--longo-box:#1F8A55;font-family:var(--ff-body);color:#272259;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .psheet *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .psheet__title{font-size:22pt;line-height:1.1;letter-spacing:.01em;text-align:center;text-transform:uppercase;color:#272259}
+  .psheet__who{margin-top:2mm;font-size:10pt;text-align:center;color:#57537E}
+  .psheet__box{--cb:var(--curto-box);display:grid;grid-template-columns:40mm minmax(0,1fr);margin-top:5mm;border:1.5px solid var(--cb);border-radius:4mm;overflow:hidden;break-inside:avoid}
+  .psheet__box--medio{--cb:var(--medio-box)}
+  .psheet__box--longo{--cb:var(--longo-box)}
+  .psheet__side{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4mm 3mm;background:var(--cb);color:#fff;text-align:center}
+  .psheet__box--medio .psheet__side{color:#3B2B00}
+  .psheet__side .boxart{width:18mm}
+  .psheet .boxart__shadow{fill:rgba(0,0,0,.18)}
+  .psheet__name{margin-top:1.5mm;font-family:var(--ff-display);font-weight:700;font-size:13pt;line-height:1.15}
+  .psheet__range{font-size:9.5pt}
+  .psheet__metas{display:grid;grid-template-columns:minmax(0,1fr);gap:0 5mm;padding:2.5mm 5mm}
+  .psheet__metas--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .psheet__metas--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .psheet__meta{padding:1mm 0}
+  .psheet__metas--1 .psheet__meta + .psheet__meta{border-top:1px dashed #BEBDCD}
+  .psheet__metas:not(.psheet__metas--1) .psheet__meta + .psheet__meta{padding-left:5mm;border-left:1px dashed #BEBDCD}
+  .psheet__line{display:flex;align-items:flex-end;gap:2mm;padding:1.2mm 0;font-size:10pt;line-height:1.3}
+  .psheet__line .ico{flex:none;width:4mm;height:4mm;color:var(--cb)}
+  .psheet__box--medio .psheet__line .ico{color:#8A5F00}
+  .psheet__label{flex:none;font-weight:600}
+  .psheet__fill{flex:1;min-width:8mm;min-height:5mm;padding:0 1mm;border-bottom:1px solid #9E9CB4;font-family:var(--ff-mono);font-size:10pt}
+  /* com 2 ou 3 metas lado a lado, o rótulo fica em cima da linha */
+  .psheet__metas:not(.psheet__metas--1) .psheet__line{flex-wrap:wrap;row-gap:.5mm}
+  .psheet__metas:not(.psheet__metas--1) .psheet__fill{flex-basis:100%;padding-left:6mm}
+  .psheet__formula{margin-top:6mm;font-family:var(--ff-display);font-style:italic;font-weight:600;font-size:12pt;text-align:center}
+}
