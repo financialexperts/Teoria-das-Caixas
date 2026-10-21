@@ -149,9 +149,15 @@
 @media (max-width:760px){
   .ckeys--stack{grid-template-columns:minmax(0,1fr)}
   .ckeys--stack .ckey__text{flex-direction:row;gap:10px}
-  /* a conta do saldo, uma parte embaixo da outra */
-  .psaldo__eq{grid-template-columns:minmax(0,1fr);gap:6px}
-  .psaldo__op{justify-self:center;padding:0;font-size:20px}
+  /* a conta do saldo: a receita e as despesas lado a lado e o saldo
+     embaixo, na largura toda (o "=" sai) */
+  .psaldo__eq{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px 6px}
+  .psaldo__item{padding:10px 10px 12px}
+  .psaldo__op{padding-top:24px;font-size:20px}
+  .psaldo__eq > .psaldo__op:last-of-type{display:none}
+  .psaldo__result{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;align-items:center}
+  .psaldo__result .psaldo__hint{grid-column:1;margin-bottom:0}
+  .psaldo__result .psaldo__value{grid-column:2;grid-row:1 / span 2;height:auto;margin-top:0}
   .psaldo__hint{margin-bottom:8px}
   /* a faixa da caixa vira o título dela, em cima das metas */
   .pbox{grid-template-columns:minmax(0,1fr)}
