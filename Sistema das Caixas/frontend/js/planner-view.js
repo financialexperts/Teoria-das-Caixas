@@ -31,7 +31,8 @@
 
   function monthOptions(sel) {
     return '<option value="">Mês</option>' + Format.months.map(function (nome, i) {
-      return '<option value="' + (i + 1) + '"' + (sel === i + 1 ? " selected" : "") + ">" + nome + "</option>";
+      return '<option value="' + (i + 1) + '"' + (sel === i + 1 ? " selected" : "") + ">" +
+        nome.charAt(0).toUpperCase() + nome.slice(1) + "</option>";
     }).join("");
   }
 
