@@ -304,7 +304,9 @@
     var certa = Catalog.answerOf(r);
 
     card.hidden = id !== active;
-    card.classList.toggle("is-done", !!a);
+    // certa, o quadrinho ganha o selo verde; errada, o x vermelho
+    card.classList.toggle("is-done", !!a && Game.isRight(id));
+    card.classList.toggle("is-miss", !!a && !Game.isRight(id));
     card.querySelector("[data-stage]").classList.toggle("is-waiting", waiting);
     card.querySelector("[data-ready]").hidden = !waiting;
     card.querySelector("[data-time]").hidden = !!a || waiting;

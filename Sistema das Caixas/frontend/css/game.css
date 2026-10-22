@@ -229,6 +229,11 @@
 .steps__item.is-miss .steps__num{border-color:var(--danger);background:var(--danger) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' d='M4.5 4.5l7 7M11.5 4.5l-7 7'/%3E%3C/svg%3E") center/13px no-repeat;color:transparent;animation:badge-pop .45s var(--spring)}
 .steps__item.is-miss + .steps__item::before{background:var(--danger)}
 .steps__item.is-miss .steps__kicker{color:var(--danger)}
+/* o cartão da rodada errada: o x vermelho no quadrinho (o da certa, o selo
+   verde, vem do styles.css) */
+.rcard.is-miss > .head > .itile::after{content:"";position:absolute;right:-6px;bottom:-6px;width:20px;height:20px;border-radius:50%;border:2px solid var(--surface);background:var(--danger) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' d='M4.5 4.5l7 7M11.5 4.5l-7 7'/%3E%3C/svg%3E") center/10px no-repeat;animation:badge-pop .45s var(--spring)}
+.rcard.is-miss .sfoot__status{font-weight:600;color:var(--danger)}
+.rcard.is-done .sfoot__status{font-weight:600;color:var(--accent-ink)}
 
 /* ---------- O placar final ---------- */
 /* um cartão por categoria do ranking: o número grande e o que ele quer dizer */
