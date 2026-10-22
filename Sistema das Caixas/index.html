@@ -58,10 +58,6 @@
 
   <div id="view-app" hidden>
 
-  <!-- ============ A BIA, AS CAIXAS E O PONTO DE PARTIDA ============ -->
-  <!-- os valores vêm de backend/js/historia.js e as falas das caixas de
-       backend/js/caixas.js (o app.js monta); os ícones com data-icon são
-       desenhados pelo icons.js -->
   <section class="card intro" aria-labelledby="intro-title">
     <div class="intro__text">
       <p class="card__kicker intro__tag"><span data-icon="caixa"></span>Teoria das caixas</p>
@@ -114,10 +110,6 @@
       </div>
     </div>
 
-    <!-- como a planilha funciona: as cores das linhas, a conta da folha e o
-         que dá pra digitar. A dica muda no celular: o teclado de números dele
-         não tem Enter nem os sinais das contas (eles ficam na barrinha que o
-         sheet.js põe acima do teclado) -->
     <div class="card howto">
       <ul class="howto__keys">
         <li class="howto__key howto__key--data"><span><strong>Laranja:</strong> os dados da Bia, já preenchidos</span></li>
@@ -129,8 +121,6 @@
       <p class="howto__tip howto__tip--touch">Digite o resultado de cada cálculo, como <code>120</code> (os pontos e os centavos entram sozinhos: <code>120,00</code>), ou a conta, com os sinais da barrinha que aparece em cima do teclado: <code>360/3</code>. O <strong>=</strong> põe o resultado da conta na célula. Depois, toque em <strong>Conferir os cálculos</strong>.</p>
     </div>
 
-    <!-- a régua do tempo vem de backend/js/historia.js e caixas.js (ruler.js
-         monta): as metas aparecem nela quando vão para a caixa certa -->
     <div class="card rl">
       <div class="head fx">
         <span class="itile itile--violet" data-icon="linha"></span>
@@ -142,8 +132,6 @@
       <div id="ruler"></div>
     </div>
 
-    <!-- quantas respostas o aluno acertou, quantas etapas terminou e quanto
-         do saldo já foi para as caixas (sheet.js) -->
     <div class="meters meters--3" id="meters">
       <div class="meter meter--ok fx">
         <div class="meter__top">
@@ -168,8 +156,6 @@
       </div>
     </div>
 
-    <!-- as 6 etapas vêm de backend/js/historia.js: sheet.js monta as etapas
-         e um cartão pra cada, e só o da etapa aberta aparece -->
     <div class="declist" id="etapas"></div>
 
     <div class="actions actions--end">
@@ -188,8 +174,6 @@
       </div>
     </div>
 
-    <!-- o número grande conta até o total por mês (result.js); o leitor de
-         tela ouve só o valor pronto, que fica no .sr-only -->
     <div class="fhero fx">
       <span class="itile itile--lg fhero__ico" data-icon="caixa"></span>
       <div>
@@ -232,7 +216,6 @@
   </div>
 </footer>
 
-<!-- aviso de quando uma ação ainda não pode: o toast.js mostra e esconde -->
 <div class="toast" id="toast" role="alert" hidden>
   <p class="toast__text" id="toast-text"></p>
   <button class="toast__close" id="toast-close" type="button" aria-label="Fechar aviso">
