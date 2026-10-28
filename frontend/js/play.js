@@ -89,8 +89,8 @@
   }
 
   /* ============ a régua do tempo ============ */
-  // Nas rodadas de caixa, a resposta mostra onde a meta fica: a mesma régua
-  // do exercício, com cada caixa num terço (o longo prazo vai até 10 anos).
+  // Nas rodadas de caixa, a resposta mostra onde a meta fica: uma régua do
+  // tempo, com cada caixa num terço (o longo prazo vai até 10 anos).
   var EDGES = [0, 12, 60, 120];
   function pos(months) {
     var m = Math.min(months, EDGES[3]);

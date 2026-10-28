@@ -14,7 +14,7 @@
     lista: '<path d="M9 6h11M9 12h11M9 18h11"/><path class="ico-pips" d="M4.5 6h.01M4.5 12h.01M4.5 18h.01"/>',
     pessoa: '<circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/>',
 
-    // as metas (o "icon" de backend/js/historia.js e das rodadas do jogo)
+    // as metas (o "icon" das rodadas do jogo)
     fone: '<path d="M4 14.5V12a8 8 0 0 1 16 0v2.5"/><g class="ico-cups"><rect x="3" y="13.5" width="4.6" height="7" rx="1.8"/><rect x="16.4" y="13.5" width="4.6" height="7" rx="1.8"/></g>',
     video: '<rect x="2.5" y="6.5" width="13" height="11" rx="2.2"/><path class="ico-lens" d="M15.5 10.6 21.5 7v10l-6-3.6z"/>',
     cartao: '<g class="ico-card"><rect x="2.5" y="5.5" width="19" height="13" rx="2.2"/><path d="M2.5 9.8h19"/><path d="M6 15h4"/></g>',

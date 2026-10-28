@@ -14,7 +14,7 @@ window.Session.ready(function (user) {
 
   function el(id) { return document.getElementById(id); }
 
-  // o tema, o vidro e os ícones animados ficam no ui.js (as três páginas usam)
+  // o tema, o vidro e os ícones animados ficam no ui.js (as duas páginas usam)
   var semAnimacao = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ============ a abertura ============ */
@@ -31,7 +31,7 @@ window.Session.ready(function (user) {
   View.mount(el("p-caixas"), window.Session.fullName);
 
   /* ============ medidores grudados no alto ============ */
-  // Grudados, os medidores viram uma cápsula de vidro (o mesmo do exercício).
+  // Grudados, os medidores viram uma cápsula de vidro (o mesmo do jogo).
   var meters = el("meters");
   var quadroPedido = false;
   function syncStuck() {

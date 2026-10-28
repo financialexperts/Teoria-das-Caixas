@@ -2,7 +2,7 @@
   "use strict";
 
   // A tela de entrar / criar conta / esqueci a senha, trazida do Fluxo de
-  // Caixa, com as mesmas contas (o mesmo projeto Supabase). As três páginas
+  // Caixa, com as mesmas contas (o mesmo projeto Supabase). As duas páginas
   // do sistema usam esta mesma tela: ela é montada aqui dentro do
   // #view-auth, e o session.js decide quando ela aparece.
   //

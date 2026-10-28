@@ -1,10 +1,10 @@
 (function (global) {
   "use strict";
 
-  // O login das três páginas, como o roteamento por sessão do Fluxo de
+  // O login das duas páginas, como o roteamento por sessão do Fluxo de
   // Caixa (e com as mesmas contas). Enquanto ninguém entrou, a página mostra
   // a tela de login (auth.js) no lugar da atividade. Quando alguém entra, a
-  // atividade aparece e o app.js / planner-app.js / game-app.js começam,
+  // atividade aparece e o planner-app.js / game-app.js começam,
   // pelo ready(), já sabendo quem é (o que fica guardado no navegador é
   // separado por conta).
   //

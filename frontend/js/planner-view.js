@@ -221,7 +221,7 @@
         "Comece pelas caixas</p><p>Escreva uma meta em cada caixa, com a data e o valor: o valor por mês aparece sozinho.</p></div>";
     }
     return '<div class="pverdict"><p class="pverdict__title">' + Icons.tile("cofrinho", "amber", "itile--sm") +
-      "Guardar " + nw(Format.money(plan)) + " por mês</p><p>É a soma do que as caixas pedem por mês para realizar as suas metas nas datas que você escolheu.</p></div>";
+      "<span>Guardar " + nw(Format.money(plan)) + " por mês</span></p><p>É a soma do que as caixas pedem por mês para realizar as suas metas nas datas que você escolheu.</p></div>";
   }
 
   function syncSummary() {

@@ -1,11 +1,11 @@
 (function (global) {
   "use strict";
 
-  // A máscara das células de cálculo, enquanto o aluno digita um número: os
+  // A máscara das células de valor, enquanto o aluno digita um número: os
   // pontos de milhar entram sozinhos ("1800" vira "1.800"), a vírgula separa
-  // os centavos e ficam no máximo 2 casas depois dela. Ao sair da célula (ou
-  // no Enter), o número se completa do jeito que a célula pede ("1.800,00" na
-  // de dinheiro, "20" na de trocas): isso é o sheet.js, com o Format.plain.
+  // os centavos e ficam no máximo 2 casas depois dela. Ao sair da célula, o
+  // número se completa ("1.800,00"): isso é o planner-view.js, com o
+  // Format.plain.
   //
   // Numa conta ("=4500*40%", "3800*50/100"), a máscara não mexe: com
   // qualquer coisa que não seja número, o texto fica como o aluno escreveu.

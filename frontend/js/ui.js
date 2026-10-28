@@ -1,15 +1,14 @@
 (function () {
   "use strict";
 
-  // O que as três páginas do sistema têm em comum: o tema claro/escuro, o
+  // O que as duas páginas do sistema têm em comum: o tema claro/escuro, o
   // brilho do vidro que segue o ponteiro e os ícones animados. Vem antes do
-  // app.js (As caixas da Bia), do planner-app.js (Meu planejamento) e do
-  // game-app.js (Qual é a caixa?).
+  // planner-app.js (Meu planejamento) e do game-app.js (Qual é a caixa?).
 
   function el(id) { return document.getElementById(id); }
 
   /* ============ tema ============ */
-  // A chave "tema" é a mesma nas três páginas (e no Simulador de Renda, no
+  // A chave "tema" é a mesma nas duas páginas (e no Simulador de Renda, no
   // Fluxo de Caixa e nas Escolhas da Vanessa e da Karine): trocar o tema
   // numa troca em todas.
   var root = document.documentElement;

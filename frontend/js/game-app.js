@@ -18,7 +18,7 @@ window.Session.ready(function (user) {
 
   function el(id) { return document.getElementById(id); }
 
-  // o tema, o vidro e os ícones animados ficam no ui.js (as três páginas usam)
+  // o tema, o vidro e os ícones animados ficam no ui.js (as duas páginas usam)
   var semAnimacao = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ============ a abertura ============ */
