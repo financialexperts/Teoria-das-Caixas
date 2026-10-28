@@ -18,16 +18,15 @@
 
 <header class="topbar">
   <div class="wrap topbar__in">
-    <a class="brand" href="index.html" aria-label="Voltar para o exercício das caixas">
+    <a class="brand" href="meu-planejamento.html" aria-label="Recarregar a página">
       <img class="brand__logo brand__logo--light" src="frontend/img/finexperts-preto.png" alt="Financial Experts">
       <img class="brand__logo brand__logo--dark" src="frontend/img/financial-experts-branco.png" alt="Financial Experts">
     </a>
     <span class="brand__sep" aria-hidden="true"></span>
 
-    <!-- as abas do sistema: a mesma lista nas três páginas, com a da página
+    <!-- as abas do sistema: a mesma lista nas duas páginas, com a da página
          aberta marcada no aria-current -->
     <nav class="tabs" aria-label="Atividades">
-      <a class="tabs__link fx" href="index.html"><span data-icon="caixa"></span><span class="tabs__text">As caixas</span></a>
       <a class="tabs__link fx" href="meu-planejamento.html" aria-current="page"><span data-icon="calendario"></span><span class="tabs__text">Meu plano</span></a>
       <a class="tabs__link fx" href="qual-e-a-caixa.html"><span data-icon="trofeu"></span><span class="tabs__text">Qual é a caixa?</span></a>
     </nav>
@@ -77,19 +76,15 @@
     </div>
   </section>
 
-  <!-- como preencher, em 3 passos -->
+  <!-- como preencher, em 2 passos -->
   <ol class="phow" aria-label="Como preencher">
-    <li class="phow__step fx">
-      <span class="itile itile--green" data-icon="carteira"></span>
-      <div><p class="phow__title">O saldo do mês</p><p class="phow__text">Escreva quanto você recebe e quanto gasta por mês. O que sobra é o saldo das caixas.</p></div>
-    </li>
     <li class="phow__step fx">
       <span class="itile itile--violet" data-icon="caixa"></span>
       <div><p class="phow__title">Os sonhos nas caixas</p><p class="phow__text">Em cada caixa, a descrição, a data e o valor total. Até 3 metas por caixa.</p></div>
     </li>
     <li class="phow__step fx">
-      <span class="itile itile--amber" data-icon="balanca"></span>
-      <div><p class="phow__title">Cabe no saldo?</p><p class="phow__text">O resumo, no fim da folha, diz se o plano cabe e o que dá para ajustar.</p></div>
+      <span class="itile itile--amber" data-icon="cofrinho"></span>
+      <div><p class="phow__title">Quanto guardar por mês</p><p class="phow__text">O resumo, no fim da folha, soma o que cada caixa pede por mês.</p></div>
     </li>
   </ol>
 
@@ -103,37 +98,7 @@
       </div>
     </div>
 
-    <!-- o saldo do mês: receita − despesas = saldo (planner-view.js) -->
-    <div class="card psaldo" aria-labelledby="ps-title">
-      <div class="head fx">
-        <span class="itile itile--green" data-icon="carteira"></span>
-        <div>
-          <p class="card__kicker">Passo 1</p>
-          <h3 class="psaldo__title" id="ps-title">O seu saldo do mês</h3>
-        </div>
-      </div>
-      <div class="psaldo__eq">
-        <div class="psaldo__item">
-          <label class="psaldo__label" for="p-receita">Receita do mês</label>
-          <span class="psaldo__hint">salário, mesada, bicos</span>
-          <span class="cell pcell"><span class="cell__pre" aria-hidden="true">R$</span><input class="cell__input" id="p-receita" type="text" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="0,00"></span>
-        </div>
-        <span class="psaldo__op" aria-hidden="true">−</span>
-        <div class="psaldo__item">
-          <label class="psaldo__label" for="p-despesas">Despesas do mês</label>
-          <span class="psaldo__hint">transporte, celular, lanches</span>
-          <span class="cell pcell"><span class="cell__pre" aria-hidden="true">R$</span><input class="cell__input" id="p-despesas" type="text" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="0,00"></span>
-        </div>
-        <span class="psaldo__op" aria-hidden="true">=</span>
-        <div class="psaldo__item psaldo__result" id="p-saldo-box">
-          <span class="psaldo__label">Saldo do mês</span>
-          <span class="psaldo__hint" id="p-saldo-hint"></span>
-          <output class="psaldo__value" id="p-saldo" for="p-receita p-despesas" aria-live="polite">—</output>
-        </div>
-      </div>
-    </div>
-
-    <!-- quantas caixas já têm meta e quanto do saldo vai para elas -->
+    <!-- quantas caixas já têm meta e quanto vai para elas por mês -->
     <div class="meters" id="meters">
       <div class="meter meter--steps fx">
         <div class="meter__top">
@@ -142,27 +107,27 @@
         </div>
         <span class="meter__track" aria-hidden="true"><span class="meter__fill" id="meter-box-fill"></span></span>
       </div>
-      <div class="meter meter--saldo fx" id="meter-saldo">
+      <div class="meter meter--saldo fx">
         <div class="meter__top">
-          <p class="meter__label"><span class="meter__ico" data-icon="carteira"></span>Saldo<span class="meter__more">&nbsp;nas caixas</span></p>
-          <p class="meter__nums"><span class="meter__used" id="meter-saldo-used">—</span><span id="meter-saldo-of"> / <span id="meter-saldo-max"></span></span></p>
+          <p class="meter__label"><span class="meter__ico" data-icon="cofrinho"></span>Por mês<span class="meter__more">&nbsp;nas caixas</span></p>
+          <p class="meter__nums"><span class="meter__used" id="meter-plan-used">—</span></p>
         </div>
-        <span class="meter__track meter__track--stack" id="meter-saldo-track" aria-hidden="true"></span>
+        <span class="meter__track meter__track--stack" id="meter-plan-track" aria-hidden="true"></span>
       </div>
     </div>
 
-    <p class="pstep-title"><span class="card__kicker">Passo 2</span>Os seus sonhos, nas 3 caixas</p>
+    <p class="pstep-title"><span class="card__kicker">Passo 1</span>Os seus sonhos, nas 3 caixas</p>
     <!-- as 3 caixas da folha (planner-view.js monta) -->
     <div class="pboxes" id="p-caixas"></div>
 
-    <!-- o resumo: para onde vai o saldo e se cabe -->
+    <!-- o resumo: quanto cada caixa pede por mês e o total -->
     <section class="card invcard presumo" aria-labelledby="pr-title">
       <div class="head fx">
-        <span class="itile itile--amber itile--lg" data-icon="balanca"></span>
+        <span class="itile itile--amber itile--lg" data-icon="cofrinho"></span>
         <div>
-          <p class="card__kicker">Passo 3</p>
-          <h2 class="invcard__title" id="pr-title">Cabe no saldo?</h2>
-          <p class="invcard__sub">O total por mês das 3 caixas, comparado com o seu saldo.</p>
+          <p class="card__kicker">Passo 2</p>
+          <h2 class="invcard__title" id="pr-title">Quanto guardar por mês</h2>
+          <p class="invcard__sub">O que cada uma das 3 caixas pede por mês, e o total do plano.</p>
         </div>
       </div>
       <div id="p-resumo" aria-live="polite"></div>
