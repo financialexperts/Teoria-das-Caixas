@@ -2,8 +2,8 @@
   "use strict";
 
   // As 3 caixas da folha "Meu planejamento financeiro": cada meta vai para a
-  // caixa do prazo dela, contado em meses a partir de hoje. As três
-  // atividades leem daqui, então os nomes, os prazos e as falas mudam aqui.
+  // caixa do prazo dela, contado em meses a partir de hoje. As duas
+  // atividades leem daqui, então os nomes e os prazos mudam aqui.
   //
   // key: o nome da caixa no código (e na cor do styles.css: --curto, --medio,
   //   --longo). name: o nome na tela. short: o nome curto (botões apertados).
@@ -11,7 +11,6 @@
   //   caixa (12 meses ainda é curto prazo; 60 meses, 5 anos, ainda é médio).
   //   A última caixa não tem fim (Infinity).
   // examples: metas que costumam ir nela (vão nas dicas).
-  // falas: o que a caixa diz no balão, quando o aluno toca nela (index.html).
   var LIST = [
     {
       key: "curto",
@@ -19,12 +18,7 @@
       short: "Curto",
       range: "0 a 12 meses",
       max: 12,
-      examples: "um fone, um tênis, um curso nas férias",
-      falas: [
-        "Oi! Eu sou a caixa do curto prazo: guardo as metas de até 12 meses.",
-        "Fone, tênis, um curso nas férias: o que chega logo vem pra mim.",
-        "Comigo são poucos meses pra juntar, então cada mês pesa mais."
-      ]
+      examples: "um fone, um tênis, um curso nas férias"
     },
     {
       key: "medio",
@@ -32,12 +26,7 @@
       short: "Médio",
       range: "1 a 5 anos",
       max: 60,
-      examples: "a carteira de motorista, um notebook, uma viagem com a turma",
-      falas: [
-        "Eu sou a caixa do médio prazo: de 1 a 5 anos.",
-        "Carteira de motorista, notebook, viagem de formatura... é comigo!",
-        "Com mais meses pra juntar, a parte de cada mês fica menor."
-      ]
+      examples: "a carteira de motorista, um notebook, uma viagem com a turma"
     },
     {
       key: "longo",
@@ -45,12 +34,7 @@
       short: "Longo",
       range: "acima de 5 anos",
       max: Infinity,
-      examples: "o primeiro carro, a faculdade, a casa própria",
-      falas: [
-        "E eu sou a do longo prazo: acima de 5 anos.",
-        "Carro, faculdade, a casa própria: sonho grande precisa de tempo.",
-        "Pouco por mês, por muito tempo, vira muito. Comece cedo!"
-      ]
+      examples: "o primeiro carro, a faculdade, a casa própria"
     }
   ];
 

@@ -9,11 +9,11 @@
   var Toast = global.Toast;
   var Icons = global.Icons;
 
-  // A folha "Meu planejamento financeiro" na tela: o saldo do mês em cima e
-  // as 3 caixas, cada uma com as linhas da folha (descrição, data, valor
-  // total, quantidade de meses e valor a poupar por mês). O aluno escreve a
-  // descrição, a data e o valor; os meses e o valor por mês saem sozinhos.
-  // Embaixo, o resumo: quanto do saldo vai para as caixas e se cabe.
+  // A folha "Meu planejamento financeiro" na tela: as 3 caixas, cada uma com
+  // as linhas da folha (descrição, data, valor total, quantidade de meses e
+  // valor a poupar por mês). O aluno escreve a descrição, a data e o valor;
+  // os meses e o valor por mês saem sozinhos. Embaixo, o resumo: quanto cada
+  // caixa pede por mês e o total.
   //
   // As metas são montadas uma vez (e de novo só quando uma meta entra, sai
   // ou muda de caixa); o resto só é atualizado, pra não tirar o foco de quem
@@ -178,109 +178,59 @@
     card.classList.toggle("is-ready", list.some(function (m) { return P.calc(m, c.key).monthly !== null; }));
   }
 
-  // o saldo, embaixo da receita e das despesas
-  function syncSaldo() {
-    var s = P.saldo();
-    el("p-saldo").textContent = s === null ? "—" : Format.money(s);
-    el("p-saldo-box").classList.toggle("is-neg", s !== null && s < 0);
-    el("p-saldo-hint").textContent = s === null
-      ? "Preencha a receita e as despesas."
-      : s < 0 ? "As despesas passam da receita: não sobra nada para as caixas." : "É ele que vai ser dividido nas caixas.";
-  }
-
-  // Os medidores do alto: quantas caixas já têm meta e quanto do saldo vai
-  // para elas (um pedaço por caixa, na cor dela; vermelho quando passa).
+  // Os medidores do alto: quantas caixas já têm meta e quanto vai para elas
+  // por mês (um pedaço por caixa, na cor dela).
   function syncMeters() {
     var n = Caixas.list.filter(function (c) { return P.boxTotal(c.key) > 0; }).length;
     el("meter-box-used").textContent = String(n);
     el("meter-box-fill").style.width = (n / Caixas.list.length * 100) + "%";
-    var s = P.saldo();
     var plan = P.planned();
-    var base = Math.max(s || 0, plan, 1);
+    var base = Math.max(plan, 1);
     Caixas.list.forEach(function (c) {
-      el("meter-saldo-track").querySelector('[data-seg="' + c.key + '"]').style.width = (P.boxTotal(c.key) / base * 100) + "%";
+      el("meter-plan-track").querySelector('[data-seg="' + c.key + '"]').style.width = (P.boxTotal(c.key) / base * 100) + "%";
     });
-    el("meter-saldo-used").textContent = Format.compactMoney(plan);
-    el("meter-saldo-of").hidden = s === null;
-    el("meter-saldo-max").textContent = s === null ? "" : Format.compactMoney(s);
-    el("meter-saldo").classList.toggle("is-over", s !== null && plan > s);
+    el("meter-plan-used").textContent = Format.compactMoney(plan);
   }
 
-  // O resumo: a barra do saldo (um pedaço por caixa e a folga) e o que ela
-  // quer dizer. Quando passa do saldo, as sugestões do que dá pra fazer.
-  function splitHTML(s, plan) {
-    var base = Math.max(s || 0, plan, 1);
+  // O resumo: a barra do total por mês (um pedaço por caixa) e o total.
+  function splitHTML(plan) {
     var parts = Caixas.list.map(function (c) { return { key: c.key, name: c.name, v: P.boxTotal(c.key) }; })
       .filter(function (p) { return p.v > 0; });
-    var sobra = s === null ? 0 : s - plan;
-    if (sobra > 0) parts.push({ key: "folga", name: "Folga (o que sobra)", v: sobra });
-    var label = parts.map(function (p) { return p.name + ": " + Format.money(p.v); }).join("; ") || "Nada ainda";
+    var label = parts.map(function (p) { return p.name + ": " + Format.money(p.v); }).join("; ");
     return '<div class="sbar">' +
-      '<p class="sbar__title">' + (s === null ? "O que vai para as caixas por mês" : "Para onde vai o saldo de " + nw(Format.money(s))) + "</p>" +
+      '<p class="sbar__title">O que vai para cada caixa por mês</p>' +
       '<div class="sbar__track" role="img" aria-label="' + Format.esc(label) + '">' +
         parts.map(function (p, i) {
-          var w = p.v / base * 100;
-          var pct = s > 0 ? Format.pct(p.v / s * 100) : "";
+          var w = p.v / plan * 100;
           return '<span class="sbar__seg sbar__seg--' + p.key + '" style="width:' + w + "%;--i:" + i + '">' +
-            (w >= 9 && pct ? '<span class="sbar__pct">' + pct + "</span>" : "") + "</span>";
+            (w >= 9 ? '<span class="sbar__pct">' + Format.pct(w) + "</span>" : "") + "</span>";
         }).join("") +
-        (s !== null && plan > s && s > 0 ? '<span class="sbar__limit" style="left:' + (s / base * 100) + '%"></span>' : "") +
       "</div>" +
       '<ul class="sbar__legend">' + parts.map(function (p) {
         return '<li class="sbar__item sbar__item--' + p.key + '"><span class="sbar__dot" aria-hidden="true"></span>' +
           '<span class="sbar__name">' + Format.esc(p.name) + "</span>" +
           '<span class="sbar__val">' + nw(Format.money(p.v)) + "</span></li>";
       }).join("") +
-      (s !== null && plan > s ? '<li class="sbar__item sbar__item--over"><span class="sbar__dot" aria-hidden="true"></span>' +
-        '<span class="sbar__name">Passa do saldo</span><span class="sbar__val">' + nw(Format.money(plan - s)) + "</span></li>" : "") +
       "</ul>" +
       "</div>";
   }
 
-  function verdictHTML(s, plan) {
+  function verdictHTML(plan) {
     if (!plan) {
       return '<div class="pverdict"><p class="pverdict__title">' + Icons.tile("caixa", "violet", "itile--sm") +
         "Comece pelas caixas</p><p>Escreva uma meta em cada caixa, com a data e o valor: o valor por mês aparece sozinho.</p></div>";
     }
-    if (s === null) {
-      return '<div class="pverdict"><p class="pverdict__title">' + Icons.tile("carteira", "violet", "itile--sm") +
-        "Falta o saldo</p><p>Por mês, as suas caixas pedem " + nw(Format.money(plan)) +
-        ". Preencha a receita e as despesas lá em cima para ver se cabe no seu saldo.</p></div>";
-    }
-    var sobra = Math.round((s - plan) * 100) / 100;
-    if (sobra >= 0) {
-      return '<div class="pverdict pverdict--ok"><p class="pverdict__title">' + Icons.tile("conferir", "green", "itile--sm") +
-        "Cabe no saldo!</p><p>As caixas pedem " + nw(Format.money(plan)) + " por mês, e o seu saldo é de " + nw(Format.money(s)) + ". " +
-        (sobra > 0 ? "Sobram " + nw(Format.money(sobra)) + " de folga: que tal guardar uma parte como reserva para imprevistos?"
-          : "Não sobra folga: qualquer imprevisto aperta o plano. Que tal deixar uma parte do saldo livre?") +
-        "</p></div>";
-    }
-    var falta = -sobra;
-    var sug = P.suggestions();
-    return '<div class="pverdict pverdict--over"><p class="pverdict__title">' + Icons.tile("alerta", "pink", "itile--sm") +
-      "Passou do saldo</p><p>As caixas pedem " + nw(Format.money(plan)) + " por mês, mas o seu saldo é de " + nw(Format.money(s)) +
-      ": faltam " + nw(Format.money(falta)) + " por mês. Dá para ajustar:</p>" +
-      '<ul class="pverdict__list">' +
-        sug.map(function (x) {
-          var nome = x.meta.desc.trim() || "a meta de " + Caixas.byKey(x.key).name.toLowerCase();
-          return "<li><strong>Adiar " + Format.esc(nome) + "</strong> para " + nw(Format.monthYear(x.date)) +
-            ": ela passa a pedir " + nw(Format.money(x.monthly)) + " por mês" +
-            (Caixas.of(x.months).key !== x.key ? " (e vai para o " + Format.esc(Caixas.of(x.months).name.toLowerCase()) + ")" : "") + ".</li>";
-        }).join("") +
-        "<li><strong>Aumentar o saldo</strong>: gastar " + nw(Format.money(falta)) + " a menos (ou ganhar " + nw(Format.money(falta)) + " a mais) por mês.</li>" +
-        "<li><strong>Escolher uma meta mais barata</strong>, ou tirar uma meta do plano por enquanto.</li>" +
-      "</ul></div>";
+    return '<div class="pverdict"><p class="pverdict__title">' + Icons.tile("cofrinho", "amber", "itile--sm") +
+      "Guardar " + nw(Format.money(plan)) + " por mês</p><p>É a soma do que as caixas pedem por mês para realizar as suas metas nas datas que você escolheu.</p></div>";
   }
 
   function syncSummary() {
-    var s = P.saldo();
     var plan = P.planned();
-    el("p-resumo").innerHTML = (plan ? splitHTML(s, plan) : "") + verdictHTML(s, plan);
+    el("p-resumo").innerHTML = (plan ? splitHTML(plan) : "") + verdictHTML(plan);
   }
 
   function sync() {
     Caixas.list.forEach(syncBox);
-    syncSaldo();
     syncMeters();
     syncSummary();
   }
@@ -294,11 +244,11 @@
   }
 
   function sheetHTML() {
-    var s = P.saldo();
+    var plan = P.planned();
     var name = getName ? getName() : "";
     return '<h1 class="psheet__title">Meu planejamento financeiro</h1>' +
       '<p class="psheet__who">' + (name ? "<strong>" + Format.esc(name) + "</strong> · " : "") + "Feito em " + Format.esc(Format.monthYear(P.today())) +
-        (s !== null ? " · Saldo do mês: " + Format.esc(Format.money(s)) + " · Nas caixas: " + Format.esc(Format.money(P.planned())) : "") + "</p>" +
+        (plan ? " · Nas caixas: " + Format.esc(Format.money(plan)) + " por mês" : "") + "</p>" +
       Caixas.list.map(function (c) {
         var list = P.metasOf(c.key);
         return '<section class="psheet__box psheet__box--' + c.key + '">' +
@@ -325,7 +275,7 @@
   }
 
   /* ============ eventos ============ */
-  // A máscara dos valores em reais (mask.js): os pontos de milhar entram
+  // A máscara do valor total (mask.js): os pontos de milhar entram
   // sozinhos e o cursor fica no mesmo lugar dos algarismos.
   function mascarar(input, inputType) {
     var raw = input.value;
@@ -413,35 +363,18 @@
     }
   }
 
-  // a receita e as despesas: a mesma máscara, o mesmo completar
-  function bindMoney(input, setter) {
-    input.addEventListener("input", function (e) {
-      if (!e.isComposing) mascarar(input, e.inputType || "");
-      setter(input.value);
-      syncSaldo();
-      syncMeters();
-      syncSummary();
-    });
-    input.addEventListener("blur", function () {
-      var v = completar(input);
-      if (v !== null) setter(v);
-    });
-  }
-
   /* ============ API ============ */
   function render() {
     root.innerHTML = Caixas.list.map(boxHTML).join("");
     Icons.mount(root);
     Caixas.list.forEach(function (c) { renderBox(c.key); });
-    el("p-receita").value = P.receita();
-    el("p-despesas").value = P.despesas();
     sync();
   }
 
   function mount(container, nameFn) {
     root = container;
     getName = nameFn || null;
-    el("meter-saldo-track").innerHTML = Caixas.list.map(function (c) {
+    el("meter-plan-track").innerHTML = Caixas.list.map(function (c) {
       return '<span class="meter__seg meter__seg--' + c.key + '" data-seg="' + c.key + '"></span>';
     }).join("");
     el("meter-box-max").textContent = String(Caixas.list.length);
@@ -450,8 +383,6 @@
     root.addEventListener("change", handleInput);
     root.addEventListener("focusout", handleBlur);
     root.addEventListener("click", handleClick);
-    bindMoney(el("p-receita"), P.setReceita);
-    bindMoney(el("p-despesas"), P.setDespesas);
     global.addEventListener("beforeprint", buildSheet);
   }
 
