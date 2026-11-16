@@ -89,12 +89,15 @@ O resultado vai pro ranking assim que o aluno responde a última rodada. Cada al
 As duas páginas abrem numa tela de **Entrar / Criar conta**, a mesma do Fluxo de Caixa e das Escolhas da Vanessa e da Karine, e com o **mesmo banco**: o projeto Supabase `xorqsuqjmvkyzgagdxfz`, em [`frontend/js/config.js`](frontend/js/config.js) (uma cópia do `config.js` do outro sistema). Quem já tem conta lá entra com o mesmo e-mail e a mesma senha, e quem cria a conta aqui também pode usar ela lá. A atividade só aparece depois que o aluno entra. No alto, ficam o nome dele e o botão **Sair**.
 
 - **Criar conta** pede o nome completo, o e-mail e uma senha de pelo menos 6 caracteres. O nome vai pros dados do login e pra tabela `profiles` (a mesma do Fluxo de Caixa).
+- **Continuar com o Google**, no alto de Entrar e de Criar conta, entra com a conta do Google, sem senha. Quem ainda não tem conta ganha uma na hora, com o nome do Google (que também vai pra `profiles`), e quem já tem conta com o mesmo e-mail entra nela mesma.
 - **Esqueceu a senha?** manda um link pro e-mail, que volta pra página em que o aluno estava.
 - **Sair** volta pra tela de entrar.
 
 O ranking do Qual é a caixa? usa a **mesma tabela `game_scores`** do jogo Seu dinheiro no tempo: uma linha por aluno e por jogo, separadas pela coluna `game` (aqui, `qual-e-a-caixa`; lá, `dinheiro-no-tempo`). Cada linha tem o apelido (`nickname`), o nome do login (`player_name`), o placar (`scores`: `{ pontos, acertos, sequencia }`) e a resposta de cada rodada (`picks`). Como a tabela já existe no banco, **não precisa criar nada novo no Supabase**: o ranking já funciona. Quem está logado lê todas as linhas, mas só grava e muda as próprias. Sem a tabela, o jogo funciona igual e, no lugar do ranking, aparece o aviso de que falta criá-la.
 
 Pra os links do e-mail (trocar a senha, confirmar a conta) voltarem pra este sistema, o endereço dele tem que estar em **Authentication → URL Configuration → Redirect URLs**, no painel do Supabase (no GitHub Pages, algo como `https://financialexperts.github.io/Teoria-das-caixas/**`). Um link que cai no endereço da pasta (o `index.html`) segue pro Meu plano com o acesso junto.
+
+O **Continuar com o Google** volta pelo mesmo endereço (a página em que o aluno estava), então também depende dessa lista. E o Google precisa estar ligado em **Authentication → Sign In / Providers → Google**, com o Client ID e o Client Secret de um cliente OAuth do Google Cloud (que tem que ter `https://xorqsuqjmvkyzgagdxfz.supabase.co/auth/v1/callback` em *URIs de redirecionamento autorizados*). Enquanto ele estiver desligado, o botão só avisa que o login com o Google ainda não está disponível.
 
 ---
 
@@ -115,6 +118,7 @@ frontend/
                                 das Escolhas da Vanessa e da Karine)
   js/supabaseClient.js          liga o cliente do Supabase
   js/auth.js                    a tela de entrar / criar conta / esqueci a senha
+  js/google-auth.js             o botão "Continuar com o Google" (a mesma cópia em todos os sistemas)
   js/session.js                 o login das duas páginas: qual tela aparece, quem entrou,
                                 o botão de sair; a atividade só começa depois dele
   js/ui.js                      o que as duas páginas têm em comum: tema claro/escuro,
