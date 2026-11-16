@@ -27,6 +27,16 @@
       "</div>";
   }
 
+  // "Continuar com o Google" (google-auth.js) e a linha "ou" que separa ele
+  // do formulário de e-mail
+  function google(errId) {
+    return '<button class="gbtn" type="button" data-google data-err="' + errId + '">' +
+        '<span class="gbtn__logo" aria-hidden="true"></span>' +
+        '<span class="gbtn__text">Continuar com o Google</span>' +
+      "</button>" +
+      '<p class="authsep" aria-hidden="true">ou</p>';
+  }
+
   function markup() {
     return '<div class="auth__intro">' +
         '<p class="card__kicker intro__tag">Educação financeira</p>' +
@@ -43,6 +53,7 @@
 
         // entrar
         '<form id="pane-login" role="tabpanel" aria-labelledby="tab-login" class="card__body" novalidate>' +
+          google("login-err") +
           field("login-email", "E-mail", "email", "email", "voce@email.com") +
           field("login-password", "Senha", "password", "current-password", "Sua senha") +
           '<p class="error" role="alert" aria-live="polite" id="login-err"></p>' +
@@ -54,6 +65,7 @@
 
         // criar conta
         '<form id="pane-signup" role="tabpanel" aria-labelledby="tab-signup" class="card__body" hidden novalidate>' +
+          google("signup-err") +
           field("signup-name", "Nome completo", "text", "name", "Nome e sobrenome") +
           field("signup-email", "E-mail", "email", "email", "voce@email.com") +
           field("signup-password", "Crie uma senha", "password", "new-password", "Sua senha", "Pelo menos 6 caracteres.") +

@@ -16,6 +16,22 @@
     ? "Esse link expirou ou já foi usado. Peça um novo em \"Esqueceu a senha?\"."
     : null;
 
+  // A volta do "Continuar com o Google" (o google-auth.js marca a ida nesta
+  // aba). Erro na volta vira o aviso da tela de login e sai do endereço, pra
+  // não aparecer de novo ao recarregar a página; desistir na tela do Google
+  // (access_denied) só traz a pessoa de volta, sem aviso.
+  var oauthReturn = false;
+  try {
+    oauthReturn = global.sessionStorage.getItem("oauth-google") === "1";
+    global.sessionStorage.removeItem("oauth-google");
+  } catch (err) {}
+  var returned = (global.location.search || "") + hash;
+  if (oauthReturn && !linkError && /(^|[?&#])error=/.test(returned)) {
+    oauthReturn = false;
+    if (!/error=access_denied/.test(returned)) linkError = "Não foi possível entrar com o Google. Tente de novo.";
+    try { global.history.replaceState(null, "", global.location.pathname); } catch (err) {}
+  }
+
   var client = isConfigured && lib ? lib.createClient(cfg.url, cfg.anonKey) : null;
 
   global.DB = {
@@ -23,6 +39,7 @@
     libMissing: isConfigured && !lib,
     client: client,
     isRecovery: isRecovery,
-    linkError: linkError
+    linkError: linkError,
+    oauthReturn: oauthReturn
   };
 })(window);

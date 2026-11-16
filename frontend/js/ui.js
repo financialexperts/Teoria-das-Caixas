@@ -15,7 +15,7 @@
   var metaTheme = el("meta-theme-color");
   function syncThemeColor() {
     if (!metaTheme) return;
-    metaTheme.setAttribute("content", root.getAttribute("data-theme") === "dark" ? "#171435" : "#F7F7FA");
+    metaTheme.setAttribute("content", root.getAttribute("data-theme") === "dark" ? "#19191B" : "#F7F7FA");
   }
   var stored = null;
   try { stored = localStorage.getItem("tema"); } catch (err) { stored = null; }
